@@ -27,17 +27,23 @@ def update
 else
   flash.now[:alert] = "Update failed.  Please check the form."
   rediect_to :edit
+end
 end  
 def destroy  
-  @post.destroy
+ if @post.destroy
+  flash[:success] = “Post was successfully deleted”  
   redirect_to posts_path
+else
+  flash.now[:alert] = “Oh god something is wrong” 
+  render :edit
+end
 end  
 
 private
 
 def set_post
   @post=Post.find(params[:id])
-
+end
 def post_params  
   params.require(:post).permit(:image, :caption)
 end 
