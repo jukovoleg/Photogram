@@ -8,9 +8,11 @@ def new
 end
 def create  
   if  @post = Post.create(post_params)
+    flash[:success] = "Your post has been created!"
     redirect_to posts_path
   else
-      render :new
+    flash.now[:alert] = "Your new post couldn't be created!  Please check the form."
+    render :new
   end
 end  
 def show
@@ -19,8 +21,12 @@ def show
 def edit  
   end
 def update  
-  @post.update(post_params)
+ if @post.update(post_params)
+  flash[:success] = "Post updated."
   redirect_to(post_path(@post))
+else
+  flash.now[:alert] = "Update failed.  Please check the form."
+  rediect_to :edit
 end  
 def destroy  
   @post.destroy
