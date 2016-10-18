@@ -34,10 +34,10 @@ end
 end  
 def destroy  
  if @post.destroy
-  flash[:success] = “Post was successfully deleted”  
+  flash[:success] = 'Post was successfully deleted'  
   redirect_to posts_path
 else
-  flash.now[:alert] = “Oh god something is wrong” 
+  flash.now[:alert] = 'Oh god something is wrong'
   render :edit
 end
 end  
